@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="container mt-3">
-      {% for blogs in blog %}
-      <h2>{{ blogs.title }}</h2>
-      <h2>{{ blogs.description }}</h2>
-      <h2>{{ blogs.date }}</h2>
-      {% endfor %}
-    </div>
-  </body>
-</html>
+{% extends 'portfolio/base.html' %} {% block content %}
+<div class="container mt-3">
+  <h2>Total de blog{{ blogs.count|pluralize }}: {{ blog.count }}</h2>
+  {% for blogs in blog %}
+  <!--<a href="{% url 'blog:all_blogs' %}"></a>-->
+  <h2>{{ blogs.title }}</h2>
+  <h2>{{ blogs.description|safe|truncatechars:100 }}</h2>
+  <h5>{{ blogs.date|date:'D d M, Y'|upper }}</h5>
+  {% endfor %}
+</div>
+{% endblock %}
